@@ -20,8 +20,8 @@ class CreateToDoActivity : AppCompatActivity() {
             else{
                 title = titleEditText.text.toString()
             }
-            var prefs = getSharedPreferences( "com.example.todolist.sharedprefs", Context.MODE_PRIVATE)
-            var todos = prefs.getStringSet( "todostrings", setOf())!!.toMutableSet()
+            var prefs = getSharedPreferences( getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+            var todos = prefs.getStringSet( getString(R.string.TODO_STRINGS), setOf())!!.toMutableSet()
             todos.add(title)
 
             prefs.edit().putStringSet( "todostrings",todos).apply()
