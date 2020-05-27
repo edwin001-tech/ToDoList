@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume(){
         super.onResume()
+        //grab the todos from the CreateToDoActivity file
+
+        var prefs = getSharedPreferences( "com.example.todolist.sharedprefs", Context.MODE_PRIVATE)
+        var todos = prefs.getStringSet( "todostrings", setOf())!!.toMutableSet()
+        println(todos)
 
     }
 
