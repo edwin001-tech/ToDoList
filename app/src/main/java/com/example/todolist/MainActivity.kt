@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         //grab the todos from the CreateToDoActivity file
 
-        var prefs = getSharedPreferences( "com.example.todolist.sharedprefs", Context.MODE_PRIVATE)
-        var todos = prefs.getStringSet( "todostrings", setOf())!!.toMutableSet()
+        var prefs = getSharedPreferences( getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+        var todos = prefs.getStringSet( getString(R.string.TODO_STRINGS), setOf())!!.toMutableSet()
         println(todos)
 
     }
