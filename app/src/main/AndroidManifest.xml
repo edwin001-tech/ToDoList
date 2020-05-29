@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompleteActivity"></activity>
+        <activity android:name=".CompleteToDoActivity"></activity>
+        <activity android:name=".CompleteActivity" />
         <activity android:name=".CreateToDoActivity" />
         <activity
             android:name=".MainActivity"
