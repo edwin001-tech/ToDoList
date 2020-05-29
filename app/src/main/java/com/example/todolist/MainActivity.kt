@@ -25,10 +25,16 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             val intent = Intent(this,CreateToDoActivity::class.java)
             startActivity(intent)
+
+
+
+
         }
     }
     override fun onResume(){
         super.onResume()
+
+        updateRecycler()
         //grab the todos from the CreateToDoActivity file
 
         var prefs = getSharedPreferences( getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
@@ -40,6 +46,15 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter
 
     }
+    fun updateRecycler(){
+        var prefs = getSharedPreferences( getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+        var todos = prefs.getStringSet( getString(R.string.TODO_STRINGS), setOf())!!.toMutableSet()
+
+        layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+        adapter = ToDoAdapter(todos.toList())
+        recyclerView.adapter
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -48,12 +63,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when(item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+
+        if(item.itemId == R.id.action_delete_all) {
+            var prefs = getSharedPreferences( getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+            prefs.edit().putStringSet(getString(R.string.TODO_STRINGS), null).apply()
+
+            updateRecycler()
+
+            return true
+
+
         }
+
+
+        return super.onOptionsItemSelected(item)
     }
 }
